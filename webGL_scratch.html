@@ -8,7 +8,7 @@
       #endif
 
       void main(void) {
-        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+        gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);
       }
     </script>
     <script id="shader-vs" type="x-shader/x-vertex">
@@ -53,7 +53,7 @@
           initShaders()    ;
           initBuffers()    ;
 
-          gl.clearColor(0.0, 0.0, 1.0, 1.0) ;
+          gl.clearColor(0.4, 0.4, 0.4, 1.0) ;
           gl.enable(gl.DEPTH_TEST)          ;
 
           drawScene();
@@ -145,15 +145,21 @@
           gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexPositionBuffer);
 
           var vertices = [
-            0.0,  1.0,  0.0,
-           -1.0, -1.0,  0.0,
-            1.0, -1.0,  0.0
+            0.0,  1.5,  0.0,
+           -1.0, -0.0,  0.0,
+            1.0, -0.0,  0.0,
+           -1.0,  0.0,  0.0,
+           -2.0, -1.5,  0.0,
+           -0.0, -1.5,  0.0,
+            1.0,  0.0,  0.0,
+            2.0, -1.5,  0.0,
+           -0.0, -1.5,  0.0,
           ];
 
           //Current js list to Float32Array and use it to fill 'current array buffer'
           gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW) ;
-          triangleVertexPositionBuffer.numItems = 3                                  ; //rep 3 vert pos (num of vector)
           triangleVertexPositionBuffer.itemSize = 3                                  ; //made of 3 numbers (vector size)
+          triangleVertexPositionBuffer.numItems = vertices.length/3                  ; //numItems = vertices.length/itemSize
         }
 
         function initGL(canvas){
